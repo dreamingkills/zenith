@@ -1,0 +1,26 @@
+{
+  "name": "zenith",
+  "version": "1.0.0",
+  "description": "enhanced discord rich presence for osu!",
+  "main": "dist/index.js",
+  "repository": "https://github.com/dreamingkills/zenith",
+  "author": "tea <tea#0002>",
+  "license": "MIT",
+  "dependencies": {
+    "discord-rpc": "^4.0.1",
+    "dotenv": "^10.0.0",
+    "osu-api-extended": "^2.0.7",
+    "path": "^0.12.7",
+    "reconnecting-websocket": "^4.4.0",
+    "ws": "^8.4.0"
+  },
+  "devDependencies": {
+    "@types/discord-rpc": "^4.0.0",
+    "@types/node": "^17.0.5",
+    "@types/ws": "^8.2.2",
+    "typescript": "^4.5.4"
+  },
+  "scripts": {
+    "start": "yarn node dist/index.js"
+  }
+}
