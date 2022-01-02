@@ -14,9 +14,9 @@ import { setResultsPresence } from "./lib/presence/results";
 import { setMultiPresence } from "./lib/presence/multi";
 import { multiManager } from "./lib/multiplayer";
 
-if (!process.env.CLIENT_ID || !process.env.API_KEY)
+if (!process.env.CLIENT_ID || !process.env.CLIENT_SECRET)
   throw new Error(
-    "You must specify a Client ID and API Key in .env to use Zenith!"
+    "You must specify a Client ID and Client Secret in .env to use Zenith!"
   );
 
 const client = new rpc.Client({ transport: "ipc" });
@@ -25,7 +25,10 @@ let updating = false;
 client.once("ready", async () => {
   d("rpc client ready");
 
-  await v2.login(parseInt(process.env.CLIENT_ID!, 10), process.env.API_KEY!);
+  await v2.login(
+    parseInt(process.env.CLIENT_ID!, 10),
+    process.env.CLIENT_SECRET!
+  );
 
   updating = true;
 });
