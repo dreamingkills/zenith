@@ -177,7 +177,7 @@ socket.onmessage = async (event) => {
 };
 
 function d(s: string) {
-  if (process.env.DEBUG) console.log(`[debug] ${s}`);
+  if (process.env.DEBUG === "true") console.log(`[debug] ${s}`);
 }
 
 // gosumemory states: https://github.com/Piotrekol/ProcessMemoryDataFinder/blob/99e2014447f6d5e5ba3943076bc8210b6498db5c/OsuMemoryDataProvider/OsuMemoryStatus.cs#L3
