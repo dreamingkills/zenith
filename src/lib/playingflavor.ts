@@ -5,6 +5,6 @@ export function getFlavor(gameMode: StringGameMode) {
     osu: "Clicking circles",
     mania: "Smashing keys",
     fruits: "Catching fruits",
-    taiko: "Hitting drums",
+    taiko: "Bashing drums",
   }[gameMode];
 }
