@@ -72,7 +72,7 @@ socket.onmessage = async (event) => {
   }
 
   if (gameState === undefined) {
-    console.log("we're listening!");
+    console.log("zenith is running! check your discord!");
   }
 
   gameState = data.menu.state;
