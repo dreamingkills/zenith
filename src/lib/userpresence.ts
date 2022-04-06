@@ -9,13 +9,16 @@ export function getUserPresence(
   const presence: Presence = {};
 
   const rank = user.rankHistory.data[user.rankHistory.data.length - 1];
+  // @ts-ignore
   presence.smallImageKey = `https://a.ppy.sh/${user.id}?1640769389.jpeg`;
   presence.smallImageText = `${
+    // @ts-ignore
     user.username
   } (#${rank.toLocaleString()}) \nplaying ${resolveFullGameMode(gameMode)}`;
   presence.buttons = [
     {
       label: "View Profile",
+      //@ts-ignore
       url: `https://osu.ppy.sh/users/${user.id}/${gameMode}`,
     },
   ];

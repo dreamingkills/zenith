@@ -9,7 +9,7 @@
   "dependencies": {
     "discord-rpc": "^4.0.1",
     "dotenv": "^10.0.0",
-    "osu-api-extended": "^2.0.7",
+    "osu-api-extended": "dreamingkills/osu-api-extended",
     "path": "^0.12.7",
     "reconnecting-websocket": "^4.4.0",
     "ws": "^8.4.0"

@@ -4,7 +4,7 @@ import ws from "ws";
 import rpc from "discord-rpc";
 import { getGameState, isLastState, setLastState } from "./lib/state";
 import { Data } from "./types";
-import { v2 } from "osu-api-extended";
+import { auth } from "osu-api-extended";
 import { resolveGameMode } from "./lib/gamemode";
 import { userManager } from "./lib/user";
 import { setDefaultPresence } from "./lib/presence/default";
@@ -22,13 +22,16 @@ if (!process.env.CLIENT_ID || !process.env.CLIENT_SECRET)
 const client = new rpc.Client({ transport: "ipc" });
 let updating = false;
 
-client.once("ready", async () => {
+client.on("ready", async () => {
+  console.log("awooga");
   d("rpc client ready");
 
-  await v2.login(
+  await auth.login(
     parseInt(process.env.CLIENT_ID!, 10),
     process.env.CLIENT_SECRET!
   );
+
+  d("logged in");
 
   updating = true;
 });
@@ -50,10 +53,19 @@ let updateDebounce: number = 0;
 
 socket.onmessage = async (event) => {
   if (!updating) return;
+
+  const data = JSON.parse(event.data) as Data;
+  const state = getGameState(data.menu.state);
+
+  // this has to bypass debounce so it doesnt get stuck
+  if (state === "GameShutdownAnimation") {
+    await client.clearActivity();
+    return;
+  }
+
   if (updateDebounce >= Date.now() - 4000) return;
 
   updateDebounce = Date.now();
-  const data = JSON.parse(event.data) as Data;
 
   const gameMode = resolveGameMode(data.menu.gameMode);
   if (
@@ -67,6 +79,7 @@ socket.onmessage = async (event) => {
     if (!user) {
       d(`failed to find user ${data.gameplay.name} for ${gameMode} on bancho!`);
     } else {
+      //@ts-ignore
       d(`requested user ${user.username} (id ${user.id}) for mode ${gameMode}`);
     }
   }
@@ -76,7 +89,6 @@ socket.onmessage = async (event) => {
   }
 
   gameState = data.menu.state;
-  const state = getGameState(data.menu.state);
 
   if (state === "MainMenu") {
     await setDefaultPresence(client, data, gameMode, "Main Menu");
@@ -102,10 +114,6 @@ socket.onmessage = async (event) => {
       gameMode,
       "Selecting a map to edit..."
     );
-  }
-
-  if (state === "GameShutdownAnimation") {
-    await client.clearActivity();
   }
 
   if (
