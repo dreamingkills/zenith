@@ -2,18 +2,9 @@
 
 enhanced osu! rich presence for discord!
 
-# using
+:one: **Running Pre-install script**
 
-- **requirements**
-- gosumemory https://github.com/l3lackShark/gosumemory
-- nodejs (ideally v14.17.6) https://nodejs.org/en/download/
-- yarn https://yarnpkg.com/getting-started/install
-
-:one: **downloading the code**
-
-download the source code or clone the repository or directory of your choice.
-
-repo: https://github.com/dreamingkills/zenith
+It will download everything for you including clone this repo.
 
 :two: **adding your osu! client info**
 
@@ -25,12 +16,14 @@ open `.env.example` in your favorite text editor and add your Client ID and Clie
 
 :three: **compiling**
 
-open a command prompt in the zenith folder and run `yarn`. this will install the necessary dependencies from npm.
+Run Compile script and **make sure you have already add your client info**.
 
-next, run `yarn tsc`. it should take only a few seconds to compile the code.
+:four: **Running start script**
 
-:four: **running gosumemory and zenith**
+run a start script Both gosumemory and zenith will run both for you.
 
-run gosumemory, the directory you run gosumemory from doesn't matter.
+# This script will download 3 piece of software as a requirement
 
-then, in your command prompt in the zenith folder simply type `yarn start` and you should be good to go!
+- gosumemory https://github.com/l3lackShark/gosumemory
+- nodejs (ideally v14.17.6) https://nodejs.org/en/download/
+- yarn https://yarnpkg.com/getting-started/install
